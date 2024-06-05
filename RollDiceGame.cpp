@@ -40,7 +40,7 @@ int main()
         if (myarray[k]==j);
 
     }
-
+ 
         int counter = 0;
     for (int i = 0; i < 5; i++) {
     if (myarray[i] == 2)
