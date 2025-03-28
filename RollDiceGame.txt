@@ -1,69 +1,65 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-using namespace std;
-int dice();
-int getResult();
-int main()
-    {
 
+using namespace std;
+
+int dice();
+void getResult();
+
+int main() {
+    srand(time(0)); // Initialize random seed
+    char playAgain;
+    
+    do {
         cout << "**************************************************************" << endl;
         cout << "******************** FIVE ROLLS DICE GAME ********************" << endl;
         cout << "**************************************************************" << endl;
-        cout << "**                                                          **" << endl;
-    getResult();
-    }
-    int getResult()
-    {
-        srand(time(0));
-        int myarray[6];
-        for (int i =0; i<5; i++)
-    {
-
-    int number = dice();
-        myarray[i] = number;
-
-        cout << "**\t\t\tYou rolled: " << number << " \t\t\t    **" << endl;
-
-    }
-        cout << "**                                                          **" << endl;
-        cout << "**************************************************************" << endl;
-        cout << "**************************************************************" << endl;
-        int counter = 0;
-        for (int j = 0; j<6; j++)
-    {
-        for (int k = 0; k<6; k++)
-    {
 
 
+        getResult();
 
-        if (myarray[k]==j);
+        cout << "\nDo you want to play again? (y/n): ";
+        cin >> playAgain;
 
-    }
+    } while (playAgain == 'y' || playAgain == 'Y');
 
-        int counter = 0;
+    cout << "\nThanks for playing! Goodbye.\n";
+    return 0;
+}
+
+void getResult() {
+    int myarray[5]; // Store the results of rolls
+
+    cout << "Press ENTER to roll each die!";
+
     for (int i = 0; i < 5; i++) {
-    if (myarray[i] == 2)
-        {
-    counter = counter + 1;
-    }
-    // continue for all even numbers
+        cout << "Press ENTER to roll dice " << (i + 1) << "...";
+        cin.ignore();  // Wait for user input (pressing Enter)
+        
+        int number = dice();
+        myarray[i] = number;
+        cout << "You rolled: " << number << endl;
     }
 
+    cout << "\n**************************************************************" << endl;
+
+    // Count even numbers
+    int counter = 0;
+    for (int i = 0; i < 5; i++) {
+        if (myarray[i] % 2 == 0) {  // Check if number is even
+            counter++;
+        }
+    }
+
+    // Determine win/loss condition
     if (counter >= 2) {
-
-    cout << "you win !!!" << endl;
+        cout << "🎉 You win! You rolled at least two even numbers! 🎉\n";
     } else {
-    cout << "you losee !!!" << endl;
+        cout << "😞 You lose! Try again! 😞\n";
     }
+}
 
-    }
-    }
-    int dice()
-    {
-    int dice1 = (int)(1+(rand()%6));
-
-    int diceSum = dice1;
-
-    return diceSum;
+int dice() {
+    return 1 + (rand() % 6); // Returns a number between 1 and 6
 }
